@@ -2,8 +2,8 @@ from sys import argv
 
 def apply_parentheses(string):
     """ Método auxiliar que coloca parênteses em uma expressão regular evitando ambiguidades """
-    # Colocamos parênteses caso a expressão não possua parênteses e tem tamanho maior que 1
-    if len(string) > 1 and (string[0] != '(' and string[-1] != ')'):
+    # Colocamos parênteses caso a expressão tenha tamanho maior que 1
+    if len(string) > 1:
         return '(' + string + ')'
     
     # Caso contrário o uso de parênteses é desnecessário
@@ -96,8 +96,8 @@ if __name__ == '__main__':
     for src in states:
         for dest in delta[src]:
             if has_transition(delta, src, dest):
-                delta[src][dest] = apply_parentheses('+'.join(delta[src][dest]))
-
+                delta[src][dest] = list(map(lambda x: '\u03BB' if x == '' else x, delta[src][dest]))
+                delta[src][dest] = apply_parentheses(' + '.join(delta[src][dest]))
 
     # ------ ALGORITMO DE ELIMINAÇÃO DE ESTADOS ------ #
     for state in states:
@@ -110,7 +110,12 @@ if __name__ == '__main__':
 
             # Adicionando transição do estado e1 para e2
             if has_transition(delta, e1, e2):
-                delta[e1][e2] = apply_parentheses(delta[e1][e2] + '+' + regex)
+                if regex == '':
+                    delta[e1][e2] = apply_parentheses(delta[e1][e2] + ' + ' + '\u03BB')
+                elif delta[e1][e2] == '':
+                    delta[e1][e2] = apply_parentheses('\u03BB' + ' + ' + regex)
+                else:
+                    delta[e1][e2] = apply_parentheses(delta[e1][e2] + ' + ' + regex)
             else:
                 delta[e1][e2] = regex
 
