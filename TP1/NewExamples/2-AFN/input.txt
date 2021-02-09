@@ -1,0 +1,8 @@
+e1,e2,e3,e4
+a,b,c
+e1,e2
+e2
+e1,a,e2,e3
+e1,b,e3
+e3,c,e3,e4
+e4,b,e2

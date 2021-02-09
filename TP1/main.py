@@ -9,9 +9,11 @@ def apply_parentheses(string):
     # Caso contrário o uso de parênteses é desnecessário
     return string
 
+
 def has_transition(delta, src, dest):
     """ Método auxiliar que retorna se há transição entre os estados src e dest """
     return delta[src][dest] != []
+
 
 def get_paths(state, delta, parent):
     """ Método auxiliar que retorna um caminho de 3 estados que passa por 'state' """
@@ -22,6 +24,7 @@ def get_paths(state, delta, parent):
                 paths.append((prev, state, dest))
 
     return paths
+
 
 if __name__ == '__main__':
     if len(argv) != 2:
@@ -96,8 +99,9 @@ if __name__ == '__main__':
     for src in states:
         for dest in delta[src]:
             if has_transition(delta, src, dest):
-                delta[src][dest] = list(map(lambda x: '\u03BB' if x == '' else x, delta[src][dest]))
-                delta[src][dest] = apply_parentheses(' + '.join(delta[src][dest]))
+                regex = delta[src][dest]
+                regex = list(map(lambda x: '\u03BB' if x == '' else x, regex))
+                delta[src][dest] = apply_parentheses(' + '.join(regex))
 
     # ------ ALGORITMO DE ELIMINAÇÃO DE ESTADOS ------ #
     for state in states:
@@ -123,7 +127,8 @@ if __name__ == '__main__':
             if e in parent[e2]:
                 parent[e2].remove(e)
 
-            if e1 != e2 and e1 not in parent[e2]:
+            if (e1 != e2) and (e1 not in parent[e2]):
                 parent[e2].append(e1)
 
+    # Imprimindo a resposta, que será a transição entre o estado inicial e final do diagrama ER
     print(delta['RegEx_initial_state']['RegEx_final_state'])

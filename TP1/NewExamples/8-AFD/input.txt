@@ -1,0 +1,14 @@
+P0,I0,I1,P1,Error
+a,b
+P0
+I1
+P0,a,I0
+P0,b,I1
+I0,a,P0
+I0,b,P1
+I1,a,P1
+I1,b,Error
+P1,a,I1
+P1,b,Error
+Error,a,Error
+Error,b,Error

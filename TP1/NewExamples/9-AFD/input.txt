@@ -1,0 +1,14 @@
+Mp,Mi,MN2,MN1,Error
+0,1
+Mp
+MN2
+Mp,0,Mi
+Mp,1,MN2
+Mi,0,Mp
+Mi,1,MN1
+MN2,0,MN1
+MN2,1,Error
+MN1,0,MN2
+MN1,1,Error
+Error,0,Error
+Error,1,Error

@@ -1,8 +1,0 @@
-B,C
-a,b
-B
-C
-B,b,B
-B,a,C
-C,a,C
-C,b,B
